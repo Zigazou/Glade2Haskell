@@ -1,0 +1,38 @@
+name:                Glade2Haskell
+version:             0.1.0.0
+synopsis:            Generate an Haskell source code file from a Glade file
+description:         Please see README.md
+homepage:            https://github.com/githubuser/Glade2Haskell
+license:             BSD3
+license-file:        LICENSE
+author:              Frédéric BISSON
+maintainer:          zigazou@free.fr
+copyright:           2016 Frédéric BISSON
+category:            GUI
+build-type:          Simple
+-- extra-source-files:
+cabal-version:       >=1.10
+
+library
+  hs-source-dirs:      src
+  exposed-modules:     Glade2Haskell
+                     , Widget2Haskell
+                     , WidgetExtract
+                     , Widget
+  build-depends:       base >= 4.7 && < 5
+                     , xml
+  default-language:    Haskell2010
+  ghc-options:         -Wall
+
+executable glade2haskell
+  hs-source-dirs:      app
+  main-is:             Main.hs
+  ghc-options:         -Wall
+  build-depends:       base
+                     , Glade2Haskell
+                     , xml
+  default-language:    Haskell2010
+
+source-repository head
+  type:     git
+  location: https://github.com/githubuser/Glade2Haskell
