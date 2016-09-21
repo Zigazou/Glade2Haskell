@@ -1,3 +1,16 @@
+{- |
+Module      : Main
+Description : The CLI interface of Glade2Haskell
+Copyright   : (c) Frédéric BISSON, 2015
+License     : GPL-3
+Maintainer  : zigazou@free.fr
+Stability   : experimental
+Portability : POSIX
+
+Glade2Haskell reads a Glade file and extracts the widget definitions in order
+to create an Haskell source code file which can load a Glade file and retrieve
+each widget to fill a record.
+-}
 module Main where
 
 import System.Environment (getArgs)
@@ -21,6 +34,9 @@ simpleHelp = unlines
     , "file must comply with Haskell rules because no check is done."
     ]
 
+{- |
+The Main function.
+-}
 main :: IO ()
 main = do
     args <- getArgs
