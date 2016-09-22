@@ -21,6 +21,8 @@ library
                      , Widget
   build-depends:       base >= 4.7 && < 5
                      , xml
+                     , directory
+                     , filepath
   default-language:    Haskell2010
   ghc-options:         -Wall
 
@@ -31,6 +33,8 @@ executable glade2haskell
   build-depends:       base
                      , Glade2Haskell
                      , xml
+                     , directory
+                     , filepath
   default-language:    Haskell2010
 
 source-repository head

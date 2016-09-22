@@ -14,6 +14,8 @@ each widget to fill a record.
 module Main where
 
 import System.Environment (getArgs)
+import System.Directory (createDirectoryIfMissing)
+import System.FilePath ((</>))
 import Glade2Haskell (glade2Haskell)
 
 {-|
@@ -34,6 +36,16 @@ simpleHelp = unlines
     , "file must comply with Haskell rules because no check is done."
     ]
 
+generate :: String -> String -> IO ()
+generate typeName path = do
+    (typeDef, loader, connect) <- glade2Haskell typeName path
+
+    createDirectoryIfMissing False typeName
+    
+    writeFile (typeName </> "Type.hs") (unlines typeDef)
+    writeFile (typeName </> "Load.hs") (unlines loader)
+    writeFile (typeName </> "Connect.hs") (unlines connect)
+
 {- |
 The Main function.
 -}
@@ -41,6 +53,6 @@ main :: IO ()
 main = do
     args <- getArgs
     case args of
-        (typeName:path:[]) -> putStrLn . unlines =<< glade2Haskell typeName path
+        (typeName:path:[]) -> generate typeName path
         _ -> putStrLn simpleHelp
 

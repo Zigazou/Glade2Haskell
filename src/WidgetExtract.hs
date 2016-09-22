@@ -13,9 +13,10 @@ module WidgetExtract (extractWidgets) where
 
 import Text.XML.Light ( Content (Elem), QName (QName, qName)
                       , Element (elName, elContent), onlyElems, findAttr
+                      , findChildren
                       )
 import Data.Maybe (catMaybes)
-import Widget (Widget (Widget))
+import Widget (Widget (Widget), Signal (Signal))
 
 
 {- |
@@ -36,6 +37,17 @@ attributes.
 mWidget :: Element -> Maybe Widget
 mWidget element = Widget <$> findAttr (QName "class" Nothing Nothing) element
                          <*> findAttr (QName "id" Nothing Nothing) element
+                         <*> (pure . catMaybes) signals
+    where signals = mSignal <$> findChildren (QName "signal" Nothing Nothing)
+                                element
+
+{- |
+Given an Element, Maybe returns a Signal (it needs to have `name` and `handler`
+attributes.
+-}
+mSignal :: Element -> Maybe Signal
+mSignal element = Signal <$> findAttr (QName "name" Nothing Nothing) element
+                         <*> findAttr (QName "handler" Nothing Nothing) element
 
 {- |
 Return the children of a Content. Only Elem Content can have children.

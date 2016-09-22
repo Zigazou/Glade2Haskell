@@ -21,7 +21,7 @@ import WidgetExtract (extractWidgets)
 Given a type name and a file path, it loads a Glade file, parse its XML content
 and return a list of String ready to be unlined and output.
 -}
-glade2Haskell :: String -> String -> IO [String]
+glade2Haskell :: String -> String -> IO ([String], [String], [String])
 glade2Haskell typeName filepath = do
     xml <- readFile filepath
     return (widgets2Haskell typeName (extractWidgets (parseXML xml)))

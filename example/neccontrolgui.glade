@@ -343,6 +343,7 @@ Author: Frédéric BISSON
                 <property name="round_digits">0</property>
                 <property name="digits">0</property>
                 <property name="value_pos">right</property>
+                <signal name="value-changed" handler="onSclBrightnessChanged" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">1</property>
@@ -426,6 +427,7 @@ Author: Frédéric BISSON
                   <item translatable="yes">DICOM SIM.</item>
                   <item translatable="yes">Programmable</item>
                 </items>
+                <signal name="changed" handler="onCbtGammaChanged" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">1</property>
